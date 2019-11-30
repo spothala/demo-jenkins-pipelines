@@ -9,19 +9,21 @@ podTemplate(
     volumes: [
         hostPathVolume(mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock')
 ]) {
-    stage('Build'){
-        container('docker') {
-            checkout scm
-            sh """#!/bin/bash
-                set -eo pipefail
-                ls -altr
-                docker build -t hello:1.0 .            
-            """
+    node(label) {
+        stage('Build'){
+            container('docker') {
+                checkout scm
+                sh """#!/bin/bash
+                    set -eo pipefail
+                    ls -altr
+                    docker build -t hello:1.0 .            
+                """
+            }
         }
+        stage('Run kubectl') {
+            container('kubectl') {
+                sh "kubectl get pods"
+            }
+        } 
     }
-    stage('Run kubectl') {
-        container('kubectl') {
-            sh "kubectl get pods"
-        }
-    }   
 }
