@@ -8,7 +8,7 @@ node {
             sh """#!/bin/bash
                 set -eo pipefail
                 ls -altr
-                scp -i \$KEYFILE src/main.go vagrant@172.28.128.3:~/
+                scp -i \$KEYFILE -o StrictHostKeyChecking=no src/main.go vagrant@172.28.128.3:~/
             """
         }
     }
