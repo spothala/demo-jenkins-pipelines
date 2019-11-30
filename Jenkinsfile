@@ -1,7 +1,7 @@
 node {
     stage('SCP'){
         withCredentials([
-          usernamePassword(credentialsId: "vagrant",
+          usernamePassword(credentialsId: "vagrant-key",
           keyFileVariable: 'KEYFILE', usernameVariable: 'USERNAME')
         ]) {
             checkout scm
