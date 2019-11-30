@@ -1,4 +1,4 @@
-node('SCP') {
+node {
     checkout scm
     sh """#!/bin/bash
         set -eo pipefail
