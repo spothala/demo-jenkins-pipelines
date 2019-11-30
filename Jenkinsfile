@@ -1,16 +1,17 @@
 node {
-    stage('SCP'){
-        withCredentials(bindings: [
-          sshUserPrivateKey(credentialsId: "vagrant-key",
-          keyFileVariable: 'KEYFILE')
-        ]) {
-            checkout scm
-            sh """#!/bin/bash
-                set -eo pipefail
-                ls -altr
-                scp -i \$KEYFILE -o StrictHostKeyChecking=no src/main.go vagrant@172.28.128.3:~/
-                ssh -i \$KEYFILE -o StrictHostKeyChecking=no vagrant@172.28.128.3 'source /etc/profile && go run main.go'
-            """
-        }
+    stage('Build'){
+        checkout scm
+        sh """#!/bin/bash
+            set -eo pipefail
+            ls -altr
+            docker build -t hello:1.0 .            
+        """
+    }
+    stage('Build'){
+        sh """
+            #!/bin/bash
+            set -eo pipefail
+            docker run --rm --name gohello -p 3001:3001 hello:1.0
+        """
     }
 }
