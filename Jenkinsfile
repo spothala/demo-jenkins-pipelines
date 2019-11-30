@@ -1,8 +1,8 @@
 node {
     stage('SCP'){
-        withCredentials([
-          usernamePassword(credentialsId: "vagrant-key",
-          keyFileVariable: 'KEYFILE', usernameVariable: 'USERNAME')
+        withCredentials(bindings: [
+          sshUserPrivateKey(credentialsId: "vagrant-key",
+          keyFileVariable: 'KEYFILE')
         ]) {
             checkout scm
             sh """#!/bin/bash
