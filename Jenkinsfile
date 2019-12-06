@@ -16,17 +16,10 @@ podTemplate(
                 sh """#!/bin/sh -x
                 set -eo pipefail
                 ls -altr
-                docker build -t hello:1.0 .            
+                docker build -t hello:1.0 .
+                docker run --rm --name gohello -p 3002:3001 hello:1.0            
                 """
             }
         }
-        stage('Run kubectl') {
-            container('kubectl') {
-                sh """#!/bin/sh -x
-                set -eo pipefail
-                docker run --rm --name gohello -p 3002:3001 hello:1.0
-                """
-            }
-        } 
     }
 }
