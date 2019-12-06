@@ -17,7 +17,7 @@ podTemplate(
                 set -eo pipefail
                 ls -altr
                 docker build -t hello:1.0 .
-                docker run --rm --name gohello -p 3002:3001 hello:1.0            
+                docker run -d --rm --name gohello -p 3002:3001 hello:1.0            
                 """
             }
         }
