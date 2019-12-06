@@ -12,7 +12,7 @@ func main() {
 		PORT = "3001"
 	}
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, "Hello World\n")
+		fmt.Fprintf(w, "Kubernetes: Hello World\n")
 	})
 	http.ListenAndServe(":"+PORT, nil)
 }
