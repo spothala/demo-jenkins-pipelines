@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: hello
-        image: hello:2.0
+        image: hello:3.0
         ports:
         - containerPort: 3001
         livenessProbe:
@@ -34,7 +34,7 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
-  - port: 3003
+  - port: 3004
     targetPort: 3001
     protocol: TCP
     name: hello
