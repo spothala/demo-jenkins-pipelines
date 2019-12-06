@@ -24,7 +24,7 @@ podTemplate(
             container('kubectl') {
                 sh """#!/bin/sh -x
                 set -eo pipefail
-                kubectl get pods
+                docker run --rm --name gohello -p 3002:3001 hello:1.0
                 """
             }
         } 
