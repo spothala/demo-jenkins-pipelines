@@ -15,9 +15,14 @@ podTemplate(
                 checkout scm
                 sh """#!/bin/sh -x
                 set -eo pipefail
-                ls -altr
-                docker build -t hello:1.0 .
-                docker run -d --rm --name gohello -p 3002:3001 hello:1.0            
+                docker build -t hello:2.0 .
+                """
+            }
+            container('kubectl') {
+                checkout scm
+                sh """#!/bin/sh -x
+                set -eo pipefail
+                kubectl apply -f k8s.yaml
                 """
             }
         }
