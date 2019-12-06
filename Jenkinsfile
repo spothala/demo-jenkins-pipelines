@@ -13,16 +13,19 @@ podTemplate(
         stage('Build'){
             container('docker') {
                 checkout scm
-                sh """#!/bin/bash
-                    set -eo pipefail
-                    ls -altr
-                    docker build -t hello:1.0 .            
+                sh """#!/bin/sh -x
+                set -eo pipefail
+                ls -altr
+                docker build -t hello:1.0 .            
                 """
             }
         }
         stage('Run kubectl') {
             container('kubectl') {
-                sh "kubectl get pods"
+                sh """#!/bin/sh -x
+                set -eo pipefail
+                kubectl get pods
+                """
             }
         } 
     }
