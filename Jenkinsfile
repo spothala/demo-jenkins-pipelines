@@ -18,6 +18,8 @@ podTemplate(
                 docker build -t hello:2.0 .
                 """
             }
+        }
+        stage('Deploy'){
             container('kubectl') {
                 checkout scm
                 sh """#!/bin/sh -x
