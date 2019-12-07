@@ -2,19 +2,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hello
+  name: hellov2
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: hello
+      app: hellov2
   template:
     metadata:
       labels:
-        app: hello
+        app: hellov2
     spec:
       containers:
-      - name: hello
+      - name: hellov2
         image: hello:3.0
         ports:
         - containerPort: 3001
@@ -30,7 +30,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: hello-svc
+  name: hellov2-svc
 spec:
   type: LoadBalancer
   ports:
