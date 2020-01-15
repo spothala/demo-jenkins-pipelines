@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: hello
-        image: hello:2.0
+        image: 889509784225.dkr.ecr.us-west-2.amazonaws.com/hello:1.0
         ports:
         - containerPort: 3001
         livenessProbe:
@@ -40,3 +40,21 @@ spec:
     name: hello
   selector:
     app: hello
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: "hello-ingress"
+  annotations:
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/scheme: internet-facing
+  labels:
+    app: hello
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /
+            backend:
+              serviceName: "hello-service"
+              servicePort: 3003

@@ -1,0 +1,17 @@
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/subnets: subnet-0d8cd7e78a32fc4bc,subnet-0c0e608e848c55229,subnet-0a186df798dbff25f,subnet-0270fc13ef24d309e,subnet-0b4e29846d5eda883,subnet-0e144cc8a0506f3f8
+  name: hello
+spec:
+  rules:
+    - host: www.example.com
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: hello-service
+              servicePort: 3001
